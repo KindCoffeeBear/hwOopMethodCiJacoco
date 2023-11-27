@@ -8,11 +8,11 @@ public class RadioTest {
     @CsvFileSource(files = "src/test/resources/nextRadioStation.csv")
     public void testNext(int radioStation, int expected) {
         Radio radio = new Radio();
-        radio.radioStation = radioStation;
+        radio.setRadioStation(radioStation);
 
         radio.next();
 
-        int actual = radio.radioStation;
+        int actual = radio.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -21,11 +21,11 @@ public class RadioTest {
     @CsvFileSource(files = "src/test/resources/prevRadioStation.csv")
     public void testPrev(int radioStation, int expected) {
         Radio radio = new Radio();
-        radio.radioStation = radioStation;
+        radio.setRadioStation(radioStation);
 
         radio.prev();
 
-        int actual = radio.radioStation;
+        int actual = radio.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -37,7 +37,7 @@ public class RadioTest {
 
         radio.setRadioStation(numberRadioStation);
 
-        int actual = radio.radioStation;
+        int actual = radio.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -46,11 +46,11 @@ public class RadioTest {
     @CsvFileSource(files = "src/test/resources/increaseSoundVolume")
     public void testIncreaseSoundVolume(int soundVolume, int expected) {
         Radio radio = new Radio();
-        radio.soundVolume = soundVolume;
+        radio.setSoundVolume(soundVolume);
 
         radio.increaseSoundVolume();
 
-        int actual = radio.soundVolume;
+        int actual = radio.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -59,11 +59,11 @@ public class RadioTest {
     @CsvFileSource(files = "src/test/resources/decreaseSoundVolume")
     public void testDecreaseSoundVolume(int soundVolume, int expected) {
         Radio radio = new Radio();
-        radio.soundVolume = soundVolume;
+        radio.setSoundVolume(soundVolume);
 
         radio.decreaseSoundVolume();
 
-        int actual = radio.soundVolume;
+        int actual = radio.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
