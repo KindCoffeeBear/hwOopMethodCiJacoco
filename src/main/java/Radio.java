@@ -23,7 +23,7 @@ public class Radio {
     }
 
     public void setRadioStation(int numberRadioStation) {
-        if (numberRadioStation > 9) {
+        if (numberRadioStation > 9 || numberRadioStation < 0) {
             return;
         }
         radioStation = numberRadioStation;
@@ -42,6 +42,9 @@ public class Radio {
     }
 
     public void setSoundVolume(int numberSoundVolume) {
+        if (numberSoundVolume > 100 || numberSoundVolume < 0) {
+            return;
+        }
         soundVolume = numberSoundVolume;
     }
 }

@@ -67,4 +67,16 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/setSoundVolume.csv")
+    public void testSetSoundVolume(int numberSoundVolume, int expected) {
+        Radio radio = new Radio();
+
+        radio.setSoundVolume(numberSoundVolume);
+
+        int actual = radio.getCurrentSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
 }
