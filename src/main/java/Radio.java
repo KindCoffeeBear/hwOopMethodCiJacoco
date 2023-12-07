@@ -1,42 +1,64 @@
-public class Radio {
-    private int radioStation;
-    private int soundVolume;
+import lombok.Getter;
 
-    public int getCurrentRadioStation() {
-        return radioStation;
+public class Radio {
+    @Getter private int amountRadioStation;
+    @Getter private int firstRadioStation;
+    @Getter private int lastRadioStation;
+    @Getter private int radioStation;
+    private int minSoundVolume = 0;
+    private int maxSoundVolume = 100;
+    @Getter private int soundVolume = minSoundVolume;
+
+    public Radio(int inputAmountRadioStation) {
+        if (inputAmountRadioStation > 0) {
+            this.amountRadioStation = inputAmountRadioStation;
+        } else {
+            this.amountRadioStation = 1;
+        }
+
+        this.firstRadioStation = 0;
+        this.lastRadioStation = amountRadioStation - 1;
+        this.radioStation = firstRadioStation;
     }
 
-    public int getCurrentSoundVolume() {
-        return soundVolume;
+    public Radio() {
+        this.amountRadioStation = 10;
+        this.firstRadioStation = 0;
+        this.lastRadioStation = amountRadioStation - 1;
+        this.radioStation = firstRadioStation;
     }
 
     public void next() {
-        if (radioStation == 9) {
-            radioStation = 0;
-        } else radioStation++;
+        if (radioStation == lastRadioStation) {
+            radioStation = firstRadioStation;
+        } else {
+            radioStation++;
+        }
     }
 
     public void prev() {
-        if (radioStation == 0) {
-            radioStation = 9;
-        } else radioStation--;
+        if (radioStation == firstRadioStation) {
+            radioStation = lastRadioStation;
+        } else {
+            radioStation--;
+        }
     }
 
     public void setRadioStation(int numberRadioStation) {
-        if (numberRadioStation > 9 || numberRadioStation < 0) {
+        if (numberRadioStation > lastRadioStation || numberRadioStation < firstRadioStation) {
             return;
         }
         radioStation = numberRadioStation;
     }
 
     public void increaseSoundVolume() {
-        if (soundVolume < 100) {
+        if (soundVolume < maxSoundVolume) {
             soundVolume++;
         }
     }
 
     public void decreaseSoundVolume() {
-        if (soundVolume > 0) {
+        if (soundVolume > minSoundVolume) {
             soundVolume--;
         }
     }

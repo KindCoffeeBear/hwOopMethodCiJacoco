@@ -12,7 +12,7 @@ public class RadioTest {
 
         radio.next();
 
-        int actual = radio.getCurrentRadioStation();
+        int actual = radio.getRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -25,19 +25,52 @@ public class RadioTest {
 
         radio.prev();
 
-        int actual = radio.getCurrentRadioStation();
+        int actual = radio.getRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/setRadioStation.csv")
-    public void testSetRadioStation(int numberRadioStation, int expected) {
+    public void testSetRadioStationWithoutConstructorParameters(int numberRadioStation, int expected) {
         Radio radio = new Radio();
 
         radio.setRadioStation(numberRadioStation);
 
-        int actual = radio.getCurrentRadioStation();
+        int actual = radio.getRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetterRadioStationWithoutConstructorParameters() {
+        Radio radio = new Radio();
+
+        Assertions.assertEquals(0, radio.getFirstRadioStation());
+        Assertions.assertEquals(0, radio.getRadioStation());
+        Assertions.assertEquals(10, radio.getAmountRadioStation());
+        Assertions.assertEquals(9, radio.getLastRadioStation());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/getterRadioStationWithParameters.csv")
+    public void testGetterRadioStationWithConstructorParameters(int inputAmountRadioStation, int expectedFirstAndCurrentStation, int expectedAmountStations, int expectedLastStation) {
+        Radio radio = new Radio(inputAmountRadioStation);
+
+        Assertions.assertEquals(expectedFirstAndCurrentStation, radio.getFirstRadioStation());
+        Assertions.assertEquals(expectedFirstAndCurrentStation, radio.getRadioStation());
+        Assertions.assertEquals(expectedAmountStations, radio.getAmountRadioStation());
+        Assertions.assertEquals(expectedLastStation, radio.getLastRadioStation());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/setRadioStationWithParameters.csv")
+    public void testSetRadioStationWithConstructorParameters(int inputAmountRadioStation, int numberRadioStation, int expected) {
+        Radio radio = new Radio(inputAmountRadioStation);
+
+        radio.setRadioStation(numberRadioStation);
+
+        int actual = radio.getRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -50,7 +83,7 @@ public class RadioTest {
 
         radio.increaseSoundVolume();
 
-        int actual = radio.getCurrentSoundVolume();
+        int actual = radio.getSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -63,7 +96,7 @@ public class RadioTest {
 
         radio.decreaseSoundVolume();
 
-        int actual = radio.getCurrentSoundVolume();
+        int actual = radio.getSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -75,7 +108,7 @@ public class RadioTest {
 
         radio.setSoundVolume(numberSoundVolume);
 
-        int actual = radio.getCurrentSoundVolume();
+        int actual = radio.getSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
