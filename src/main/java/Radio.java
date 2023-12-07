@@ -1,11 +1,13 @@
+import lombok.Getter;
+
 public class Radio {
-    private int amountRadioStation;
-    private int firstRadioStation;
-    private int lastRadioStation;
-    private int radioStation;
+    @Getter private int amountRadioStation;
+    @Getter private int firstRadioStation;
+    @Getter private int lastRadioStation;
+    @Getter private int radioStation;
     private int minSoundVolume = 0;
     private int maxSoundVolume = 100;
-    private int soundVolume = minSoundVolume;
+    @Getter private int soundVolume = minSoundVolume;
 
     public Radio(int inputAmountRadioStation) {
         if (inputAmountRadioStation > 0) {
@@ -24,26 +26,6 @@ public class Radio {
         this.firstRadioStation = 0;
         this.lastRadioStation = amountRadioStation - 1;
         this.radioStation = firstRadioStation;
-    }
-
-    public int getCurrentRadioStation() {
-        return radioStation;
-    }
-
-    public int getFirstRadioStation() {
-        return firstRadioStation;
-    }
-
-    public int getLastRadioStation() {
-        return lastRadioStation;
-    }
-
-    public int getAmountRadioStation() {
-        return amountRadioStation;
-    }
-
-    public int getCurrentSoundVolume() {
-        return soundVolume;
     }
 
     public void next() {
